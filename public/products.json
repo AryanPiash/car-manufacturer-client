@@ -1,0 +1,50 @@
+[
+    {
+        "name": "Dodge RAM 1500 Rim",
+        "img": "https://cdn.shopify.com/s/files/1/0074/7887/0105/products/5_3448c005-7bec-45e0-a4c8-710557bcd614_1024x1024.jpg?v=1541494767",
+        "description": "Dodge RAM Rim is most populer and stronges Rim ever.The third generation RAM 1500 was a major update from the previous gen trucks.",
+        "minQuantity": 1000,
+        "availableQuantity": 5000,
+        "price": 699
+    },
+    {
+        "name": "BRAKE INSPECTIONS",
+        "img": "https://cdn.shopify.com/s/files/1/0074/7887/0105/products/1_c52de7c2-6a45-4b46-b998-66e8de25a889_large_crop_center.jpg?v=1541494017",
+        "description": "As part of our brake inspection we will thoroughly check your disc rotors and disc brake pads or drum shoes for signs master cylinder.",
+        "minQuantity": 1400,
+        "availableQuantity": 7000,
+        "price": 399
+    },
+    {
+        "name": "Holset Turbo Charger",
+        "img": "https://cdn.shopify.com/s/files/1/0074/7887/0105/products/6_dd75cb70-81f9-4a3d-9b0e-25df341b6c5d_large_crop_center.jpg?v=1541494681",
+        "description": "Holset Turbochargers are the only manufacturer that focuses solely on medium to heavy-duty diesel engine turbo technologies.",
+        "minQuantity": 1500,
+        "availableQuantity": 8000,
+        "price": 289
+    },
+    {
+        "name": "Lexus IS300 LED Headlight",
+        "img": "https://cdn.shopify.com/s/files/1/0074/7887/0105/products/9_7e139ba8-66e5-4172-9e11-96dc4427ae50_1024x1024.jpg?v=1541494776",
+        "description": "Lexus IS300 White LED Halo Headlight Kit 2001-2005are the most advanced halo kit ever produced.",
+        "minQuantity": 1300,
+        "availableQuantity": 12000,
+        "price": 299
+    },
+    {
+        "name": "Ironman Imove Gen 2",
+        "img": "https://cdn.shopify.com/s/files/1/0074/7887/0105/products/11_d53054c9-edc8-4d40-86f9-e9bf19288051_1024x1024.jpg?v=1541494789",
+        "description": "Your vehicle is fitted with the correct type and size of tyre for the vehicle type you are driving and for the purpose it is being used.",
+        "minQuantity": 1000,
+        "availableQuantity": 11000,
+        "price": 999
+    },
+    {
+        "name": "Front Mustang Bumper",
+        "img": "https://cdn.shopify.com/s/files/1/0074/7887/0105/products/10_677ff112-3a56-4ab1-94de-553d3f210f49_1024x1024.jpg?v=1541494782",
+        "description": "Mustang Front Bumper is designed to match OEM quality and fitment - guaranteed to fit your specified car. Made of quality ABS material.",
+        "minQuantity": 1000,
+        "availableQuantity": 12000,
+        "price": 1199
+    }
+]
