@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import LoadingSpinner from '../Shared/LoadingSpinner'
 
@@ -9,6 +9,9 @@ const Login = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
+    let navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
 
     const onSubmit = data => {
         console.log(data)
@@ -19,6 +22,15 @@ const Login = () => {
         return <LoadingSpinner></LoadingSpinner>
     }
 
+    if (user || gUser) {
+        navigate(from, { replace: true });
+    }
+
+    let signInError;
+
+    if (error || gError) {
+        signInError = <p className='text-red-500 mb-2'><small>{error?.message || gError?.message}</small></p>
+    }
 
 
     return (
@@ -78,7 +90,7 @@ const Login = () => {
 
                             </label>
                         </div>
-                        {/* {signInError} */}
+                        {signInError}
 
                         <input className='btn btn-secondary w-full mx-w-xs text-white' type="submit" value='Login' />
                         <p className='text-center mt-2'><small>New to Car Manufacturer? <Link className='text-secondary font-semibold' to='/signup'>Create new Account</Link></small></p>
