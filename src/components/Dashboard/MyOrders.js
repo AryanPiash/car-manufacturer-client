@@ -69,7 +69,7 @@ const MyOrders = () => {
                                         {(order.price && !order.paid) && <label
                                             onClick={() => setOrder(true)}
                                             htmlFor="my-modal"
-                                            class="btn modal-button btn btn-xs ml-4">Cancel</label>}
+                                            className="btn modal-button btn btn-xs ml-4">Cancel</label>}
 
                                         {(order.price && order.paid) && <span className='text-green-400'>Paid</span>}
                                     </td>

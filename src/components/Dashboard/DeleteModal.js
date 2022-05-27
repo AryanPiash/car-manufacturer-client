@@ -23,14 +23,14 @@ const DeleteModal = () => {
     }
     return (
         <div>
-            <input type="checkbox" id="my-modal" class="modal-toggle" />
-            <div class="modal">
-                <div class="modal-box">
-                    <label for="my-modal" class="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 class="font-bold text-xl text-red-400">Are you sure you want to Cancel this Order?</h3>
-                    <p class="py-4 text-red-400">If you cancel this order, the order item will delete parmanently from odrers list.</p>
-                    <div class="modal-action">
-                        <label onClick={handleDelete} for="my-modal" class="btn">Yes, I'm Sure</label>
+            <input type="checkbox" id="my-modal" className="modal-toggle" />
+            <div className="modal">
+                <div className="modal-box">
+                    <label for="my-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                    <h3 className="font-bold text-xl text-red-400">Are you sure you want to Cancel this Order?</h3>
+                    <p className="py-4 text-red-400">If you cancel this order, the order item will delete parmanently from odrers list.</p>
+                    <div className="modal-action">
+                        <label onClick={handleDelete} for="my-modal" className="btn">Yes, I'm Sure</label>
                     </div>
                 </div>
             </div>

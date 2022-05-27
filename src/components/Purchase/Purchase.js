@@ -72,8 +72,8 @@ const Purchase = () => {
 
     return (
         <div className='px-8 my-12'>
-            <div class="flex flex-col w-full lg:flex-row">
-                <div class="grid w-2/4  place-items-center">
+            <div className="flex flex-col w-full lg:flex-row">
+                <div className="grid w-2/4  place-items-center">
 
                     <div className="card max-w-md bg-base-100 shadow-xl border">
                         <figure><img className='h-32' src={img} alt="Shoes" /></figure>
@@ -88,7 +88,7 @@ const Purchase = () => {
 
                 </div>
 
-                <div class="grid place-items-center w-2/4">
+                <div className="grid place-items-center w-2/4">
                     <form onSubmit={handleSubmit} className='grid grid-cols-1 gap-3 justify-items-center mt-4 w-full'>
                         <input type="text" name='name' disabled value={user?.displayName} className="input input-bordered w-full max-w-xs" />
                         <input type="email" name='email' disabled value={user?.email} className="input input-bordered w-full max-w-xs" />
