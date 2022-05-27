@@ -12,7 +12,7 @@ const Product = ({ product }) => {
                 <p>{description}</p>
                 <span>Minimum Quantity: <span className='text-blue-800 font-semibold'>{minQuantity}</span></span>
                 <span>Available Quantity: <span className='text-blue-800 font-semibold'>{availableQuantity}</span></span>
-                <span>Price: $<span className='text-blue-800 font-semibold'>{price} /Unit</span></span>
+                <span>Price: $<span className='text-blue-800 font-semibold'>{price}</span> /Unit</span>
                 <div className="card-actions justify-center mt-4">
                     <Link to={`/purchase/${_id}`}><button className="btn btn-primary px-8 text-white">Purchase</button></Link>
                 </div>

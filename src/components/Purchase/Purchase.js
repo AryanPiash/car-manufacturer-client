@@ -13,35 +13,38 @@ const Purchase = () => {
 
     const {data: product, isLoading, refetch} = useQuery(['available'], () => fetch(url)
     .then(res => res.json()))
-    const { _id ,name, img, description, minQuantity, availableQuantity, price } = product;
-
-
+    
+    
     if(loading || isLoading){
         return <LoadingSpinner></LoadingSpinner>
     }
+    const { _id, name, img, description, minQuantity, availableQuantity, price } = product;
 
     const handleSubmit = e => {
         e.preventDefault()
         const quantity = e.target.quantity.value
         const order = {
+            clientName: user.displayName,
+            client: user.email,
+            address: e.target.address.value,
+            phone: e.target.phone.value,
             productId: _id,
             product: name,
             price,
-            client: user.email,
-            clientName: user.displayName,
-            phone: e.target.phone.value,
             quantity: quantity
         }
 
         if(quantity < minQuantity){
             console.log('You cannot order less than Minimum Quantity.');
+            return;
         }
         if(quantity > availableQuantity){
             console.log('You cannot order more than Available Quantity.');
+            return;
         }
 
         // post booking to databse
-        fetch('http://localhost:5000/booking', {
+        fetch('http://localhost:5000/order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -50,11 +53,14 @@ const Purchase = () => {
         })
         .then(res => res.json())
         .then(data => {
+            console.log(data);
             if(data.success){
                 // toast(`Appointment has set ${formatedDate} at ${slot}`)
+                console.log('Order added to mongodb');
             }
             else{
                 // toast.error(`Already have an appointment ${formatedDate} at ${slot}`)
+                console.log('Sorry order not added');
             }
             refetch()
             // close the Modal
@@ -65,7 +71,7 @@ const Purchase = () => {
     }
 
     return (
-        <div className='px-8'>
+        <div className='px-8 my-12'>
             <div class="flex flex-col w-full lg:flex-row">
                 <div class="grid w-2/4  place-items-center">
 
@@ -76,7 +82,7 @@ const Purchase = () => {
                             <p>{description}</p>
                             <span>Minimum Quantity: <span className='text-blue-800 font-semibold'>{minQuantity}</span></span>
                             <span>Available Quantity: <span className='text-blue-800 font-semibold'>{availableQuantity}</span></span>
-                            <span>Price: $<span className='text-blue-800 font-semibold'>{price} /Unit</span></span>
+                            <span>Price: $<span className='text-blue-800 font-semibold'>{price}</span> /Unit</span>
                         </div>
                     </div>
 
@@ -89,7 +95,7 @@ const Purchase = () => {
                         <input type="number" name='phone' placeholder="Phone Number" className="input input-bordered w-full max-w-xs" />
                         <input type="text" name='address' className="input input-bordered w-full max-w-xs" placeholder='Address' />
                         <input type="number" name='quantity' className="input input-bordered w-full max-w-xs" placeholder='Quantity' />
-                        <input type="submit" value="Submit" className="btn btn-secondary w-full max-w-xs" />
+                        <input type="submit" value="Order Now" className="btn btn-secondary w-full max-w-xs" />
                     </form>
                 </div>
             </div>
