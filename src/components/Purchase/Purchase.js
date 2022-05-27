@@ -1,13 +1,15 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const Purchase = () => {
     const { id } = useParams()
     const [user, loading] = useAuthState(auth)
+    const navigate = useNavigate()
     
     const url = `http://localhost:5000/products/${id}`
 
@@ -35,15 +37,15 @@ const Purchase = () => {
         }
 
         if(quantity < minQuantity){
-            console.log('You cannot order less than Minimum Quantity.');
+            toast.error('You cannot order less than Minimum Quantity.');
             return;
         }
         if(quantity > availableQuantity){
-            console.log('You cannot order more than Available Quantity.');
+            toast.error('You cannot order more than Available Quantity.');
             return;
         }
 
-        // post booking to databse
+        
         fetch('http://localhost:5000/order', {
             method: 'POST',
             headers: {
@@ -53,17 +55,15 @@ const Purchase = () => {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data);
             if(data.success){
-                // toast(`Appointment has set ${formatedDate} at ${slot}`)
-                console.log('Order added to mongodb');
+                toast.success(`Congrats! Your Order taken successfully`)
+                refetch()
             }
             else{
-                // toast.error(`Already have an appointment ${formatedDate} at ${slot}`)
-                console.log('Sorry order not added');
+                toast.error(`Sorry, This item already Ordered.Try another Item.`)
             }
             refetch()
-            // close the Modal
+            
             
         })
         
