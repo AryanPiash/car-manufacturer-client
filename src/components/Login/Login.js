@@ -8,18 +8,21 @@ import LoadingSpinner from '../Shared/LoadingSpinner'
 
 const Login = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
-    const [signInWithEmailAndPassword, user, loading, error,] = useSignInWithEmailAndPassword(auth);
+    const [signInWithEmailAndPassword, eUser, loading, error,] = useSignInWithEmailAndPassword(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     let navigate = useNavigate();
     let location = useLocation();
-    const token = useToken(user || gUser)
+    const token = useToken(eUser || gUser)
+    
 
     let from = location.state?.from?.pathname || "/";
 
     const onSubmit = data => {
         signInWithEmailAndPassword(data.email, data.password)
     };
-
+    
+    
+    
     if (loading || gLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }

@@ -9,12 +9,14 @@ import OrderReview from './components/Dashboard/OrderReview';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import RequireAuth from './components/Login/RequireAuth';
+import RequireAdmin from './components/Login/RequireAdmin';
 import SignUp from './components/Login/SignUp';
 import Purchase from './components/Purchase/Purchase';
 import Navbar from './components/Shared/Navbar'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MyProfile from './components/MyProfile/MyProfile';
+
 
 function App() {
   return (
@@ -31,7 +33,7 @@ function App() {
         <Route path='/dashboard' element={<RequireAuth><Dashboard></Dashboard></RequireAuth>}>
           <Route index element={<MyOrders></MyOrders>}></Route>
           <Route path='review' element={<OrderReview></OrderReview>}></Route>
-          <Route path='clients' element={<RequireAuth><Clients></Clients></RequireAuth>}></Route>
+          <Route path='clients' element={<RequireAdmin><Clients></Clients></RequireAdmin>}></Route>
           <Route path='addOrder' element={<RequireAuth><AddOrder></AddOrder></RequireAuth>}></Route>
           <Route path='manageDoctors' element={<RequireAuth><ManageOrders></ManageOrders></RequireAuth>}></Route>
         </Route>

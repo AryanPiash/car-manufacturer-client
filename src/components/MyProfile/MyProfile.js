@@ -1,20 +1,22 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 import auth from '../../firebase.init';
 import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const MyProfile = () => {
     const [user] = useAuthState(auth)
-    const url = `http://localhost:5000/profile/${user.email}`
+    // console.log(user);
+    const url = `http://localhost:5000/profile/${user?.email}`
 
-    const { data: profile, isLoading, refetch } = useQuery(['profile'], () => fetch(url)
+    const { data: client, isLoading, refetch } = useQuery(['profile'], () => fetch(url)
         .then(res => res.json()))
 
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }
-    const { name, email, education, location, phone, link } = profile;
+    const { email,education,location,phone,link } = client;
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -28,9 +30,6 @@ const MyProfile = () => {
             link: e.target.link.value
         }
 
-        
-
-
         fetch(`http://localhost:5000/profile/${email}`, {
             method: 'PUT',
             headers: {
@@ -40,18 +39,12 @@ const MyProfile = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                 if (data.success) {
-                    // toast.success(`Congrats! Your Review added successfully`)
-                    console.log('added successfully');
-
+                    toast.success(`Congrats! Your Profile updated successfully`)
                 }
                 else {
-                    // toast.error(`Sorry, cannot added. Please try again.`)
-                    console.log('sorry, not added');
+                    toast.error(`Sorry, cannot update profile. Please try again.`)
                 }
-
-
             })
 
 
@@ -64,7 +57,7 @@ const MyProfile = () => {
 
                     <div className="card bg-base-100 shadow-xl">
                         <div className="card-body">
-                            <h2 className="card-title">{name}</h2>
+                            <h2 className="card-title">{user.displayName}</h2>
                             <p>{email}</p>
                             <p>Education: {education}</p>
                             <p>Address: {location}</p>
