@@ -68,7 +68,7 @@ const OrderReview = () => {
 
                 <input type="number" name='rating' placeholder="Rating" className="input input-bordered w-full max-w-xs" />
 
-                <input type="submit" value="Order Now" className="btn btn-secondary w-full max-w-xs" />
+                <input type="submit" value="Add" className="btn btn-secondary w-full max-w-xs" />
             </form>
         </div>
     );
