@@ -1,13 +1,24 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useQuery } from 'react-query';
 import auth from '../../firebase.init';
+import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const MyProfile = () => {
     const [user] = useAuthState(auth)
+    const url = `http://localhost:5000/profile/${user.email}`
+
+    const { data: profile, isLoading, refetch } = useQuery(['profile'], () => fetch(url)
+        .then(res => res.json()))
+
+    if (isLoading) {
+        return <LoadingSpinner></LoadingSpinner>
+    }
+    const { name, email, education, location, phone, link } = profile;
 
     const handleSubmit = e => {
         e.preventDefault()
-        
+
         const profile = {
             name: user.displayName,
             email: user.email,
@@ -17,10 +28,11 @@ const MyProfile = () => {
             link: e.target.link.value
         }
 
+        
 
 
-        fetch('http://localhost:5000/profile', {
-            method: 'POST',
+        fetch(`http://localhost:5000/profile/${email}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -45,22 +57,40 @@ const MyProfile = () => {
 
     }
     return (
-        <div>
-            <h1>this is my profile</h1>
-            <form onSubmit={handleSubmit} className='grid grid-cols-1 gap-3 justify-items-center mt-4 w-full'>
 
-                {/* <input type="text" name='name' value={user?.displayName} readOnly placeholder='Your Name' className="input input-bordered w-full max-w-xs" /> */}
+        <div className='px-8 my-12'>
+            <div className="flex flex-col w-full lg:flex-row">
+                <div className="grid w-2/4  place-items-center">
 
-                <input type="text" name='education' placeholder='Education' className="input input-bordered w-full max-w-xs" />
+                    <div className="card bg-base-100 shadow-xl">
+                        <div className="card-body">
+                            <h2 className="card-title">{name}</h2>
+                            <p>{email}</p>
+                            <p>Education: {education}</p>
+                            <p>Address: {location}</p>
+                            <p>Phone: {phone}</p>
+                            <p>LinkeId or Github: {link}</p>
+                        </div>
+                    </div>
 
-                <input type="text" name='location' placeholder='Location' className="input input-bordered w-full max-w-xs" />
+                </div>
 
-                <input type="number" name='phone' placeholder="Phone Number" className="input input-bordered w-full max-w-xs" />
+                <div className="grid place-items-center w-2/4">
+                    <h1 className='text-xl font-bold text-secondary'>Update Profile</h1>
+                    <form onSubmit={handleSubmit} className='grid grid-cols-1 gap-3 justify-items-center mt-4 w-full'>
 
-                <input type="text" name='link' placeholder='LinkedIn or Github Link' className="input input-bordered w-full max-w-xs" />
+                        <input type="text" name='education' placeholder='Education' className="input input-bordered w-full max-w-xs" />
 
-                <input type="submit" value="Update Profile" className="btn btn-secondary w-full max-w-xs" />
-            </form>
+                        <input type="text" name='location' placeholder='Location' className="input input-bordered w-full max-w-xs" />
+
+                        <input type="number" name='phone' placeholder="Phone Number" className="input input-bordered w-full max-w-xs" />
+
+                        <input type="text" name='link' placeholder='LinkedIn or Github Link' className="input input-bordered w-full max-w-xs" />
+
+                        <input type="submit" value="Update Profile" className="btn btn-secondary w-full max-w-xs" />
+                    </form>
+                </div>
+            </div>
         </div>
     );
 };
