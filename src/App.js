@@ -20,6 +20,7 @@ import ManageProducts from './components/Dashboard/ManageProducts';
 import NotFound from './components/Shared/NotFound';
 import Portfolio from './components/Portfolio/Portfolio';
 import Blogs from './components/Blogs/Blogs';
+import Payment from './components/Dashboard/Payment';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path='/dashboard' element={<RequireAuth><Dashboard></Dashboard></RequireAuth>}>
           <Route index element={<MyOrders></MyOrders>}></Route>
           <Route path='review' element={<OrderReview></OrderReview>}></Route>
+          <Route path='payment/:id' element={<Payment></Payment>}></Route>
           <Route path='clients' element={<RequireAdmin><Clients></Clients></RequireAdmin>}></Route>
           <Route path='manageOrders' element={<RequireAdmin><ManageOrders></ManageOrders></RequireAdmin>}></Route>
           <Route path='addProduct' element={<RequireAdmin><AddProduct></AddProduct></RequireAdmin>}></Route>
