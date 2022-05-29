@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import LoadingSpinner from '../Shared/LoadingSpinner';
-import DeleteModal from './DeleteModal';
+import DeleteProductsModal from './DeleteProductsModal';
 
-const ManageOrders = () => {
-    const [orders, setOrders] = useState([])
-    const [order, setOrder] = useState(false)
+const ManageProducts = () => {
+    const [products, setProducts] = useState([])
+    const [product, setProduct] = useState(false)
     const [user, loading] = useAuthState(auth)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/orders`, {
+        fetch(`http://localhost:5000/products`, {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -19,13 +19,12 @@ const ManageOrders = () => {
             .then(res => {
                 if (res.status === 401 || res.status === 403) {
                     // localStorage.removeItem('accessToken');
-                    console.log('something problem in ManageOrder');
+                    console.log('something problem in ManageProducts');
                 }
                 return res.json()
             })
             .then(data => {
-                // console.log(data);
-                return setOrders(data)
+                return setProducts(data)
             })
 
     }, [user])
@@ -33,40 +32,39 @@ const ManageOrders = () => {
     if (loading) {
         return <LoadingSpinner></LoadingSpinner>
     }
-
     return (
         <div className='my-8'>
-            <h1 className='text-xl text-center font-semibold text-blue-800'>Manage All Orders</h1>
+            <h1 className='text-xl text-center font-semibold text-blue-800'>Manage All Products</h1>
             <div className='px-8 pt-5'>
                 <div className="overflow-x-auto  rounded-lg">
                     <table className="table w-full">
 
                         <thead>
                             <tr><th>No.</th>
-                                <th>Name</th>
-                                <th>Product</th>
-                                <th>Quantity</th>
+                                <th>Product Name</th>
+                                <th>Min Order Quantity</th>
+                                <th>Available Quantity</th>
                                 <th>Price</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {
-                                orders?.map((order, index) => <tr
+                                products?.map((product, index) => <tr
                                     key={index}
                                 >
                                     <td>{index + 1}</td>
-                                    <td>{order.clientName}</td>
-                                    <td>{order.product}</td>
-                                    <td>{order.quantity} Pcs</td>
-                                    <td>${order.price}</td>
+                                    <td>{product.name}</td>
+                                    <td>{product.minQuantity}</td>
+                                    <td>{product.availableQuantity} Pcs</td>
+                                    <td>${product.price}</td>
                                     <td>
-                                        {(order.price && !order.paid) && <label
-                                            onClick={() => setOrder(true)}
+                                        {(product.price && !product.paid) && <label
+                                            onClick={() => setProduct(true)}
                                             htmlFor="my-modal"
-                                            className="btn modal-button btn btn-xs ml-4">Delete Order</label>}
+                                            className="btn modal-button btn btn-xs ml-4">Delete Product</label>}
                                     </td>
-                                    {order && <DeleteModal></DeleteModal>}
+                                    {product && <DeleteProductsModal id={product._id}></DeleteProductsModal>}
                                 </tr>)
                             }
                         </tbody>
@@ -77,4 +75,4 @@ const ManageOrders = () => {
     );
 };
 
-export default ManageOrders;
+export default ManageProducts;

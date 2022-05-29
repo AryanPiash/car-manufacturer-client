@@ -27,7 +27,7 @@ const Login = () => {
         return <LoadingSpinner></LoadingSpinner>
     }
 
-    if (token) {
+    if (eUser || gUser) {
         navigate(from, { replace: true });
     }
 
@@ -35,6 +35,7 @@ const Login = () => {
 
     if (error || gError) {
         signInError = <p className='text-red-500 mb-2'><small>{error?.message || gError?.message}</small></p>
+        console.log(error?.message, gError?.message);
     }
 
 

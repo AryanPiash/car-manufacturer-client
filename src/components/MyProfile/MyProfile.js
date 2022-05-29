@@ -7,8 +7,9 @@ import LoadingSpinner from '../Shared/LoadingSpinner';
 
 const MyProfile = () => {
     const [user] = useAuthState(auth)
-    // console.log(user);
+    
     const url = `http://localhost:5000/profile/${user?.email}`
+    // const url = `http://localhost:5000/clients/${user?.email}`
 
     const { data: client, isLoading, refetch } = useQuery(['profile'], () => fetch(url)
         .then(res => res.json()))
@@ -16,7 +17,7 @@ const MyProfile = () => {
     if (isLoading) {
         return <LoadingSpinner></LoadingSpinner>
     }
-    const { email,education,location,phone,link } = client;
+    // const { education,location,phone,link } = client;
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -30,7 +31,7 @@ const MyProfile = () => {
             link: e.target.link.value
         }
 
-        fetch(`http://localhost:5000/profile/${email}`, {
+        fetch(`http://localhost:5000/profile/${user.email}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -39,11 +40,14 @@ const MyProfile = () => {
         })
             .then(res => res.json())
             .then(data => {
-                if (data.success) {
+                console.log(data);
+                if (data.modifiedCount === 1 || data.upsertedCount === 1) {
                     toast.success(`Congrats! Your Profile updated successfully`)
+                    refetch()
                 }
                 else {
                     toast.error(`Sorry, cannot update profile. Please try again.`)
+                    refetch()
                 }
             })
 
@@ -58,11 +62,11 @@ const MyProfile = () => {
                     <div className="card bg-base-100 shadow-xl">
                         <div className="card-body">
                             <h2 className="card-title">{user.displayName}</h2>
-                            <p>{email}</p>
-                            <p>Education: {education}</p>
-                            <p>Address: {location}</p>
-                            <p>Phone: {phone}</p>
-                            <p>LinkeId or Github: {link}</p>
+                            <p>{user.email}</p>
+                            <p>Education: {client?.education}</p>
+                            <p>Address: {client?.location}</p>
+                            <p>Phone: {client?.phone}</p>
+                            <p>LinkeId or Github: {client?.link}</p>
                         </div>
                     </div>
 

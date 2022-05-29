@@ -14,7 +14,7 @@ const MyOrders = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/order?client=${user.email}`, {
+            fetch(`http://localhost:5000/order?client=${user?.email}`, {
                 method: 'GET',
                 headers: {
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -45,7 +45,7 @@ const MyOrders = () => {
                     <table className="table w-full">
 
                         <thead>
-                            <tr><th>No.</th>
+                            <tr><th>No.my</th>
                                 <th>Name</th>
                                 <th>Product</th>
                                 <th>Quantity</th>

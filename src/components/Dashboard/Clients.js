@@ -16,6 +16,7 @@ const Clients = () => {
     }
     return (
         <div className='px-8 pt-5'>
+            <h1 className='text-xl text-center font-semibold text-blue-800 mb-4'>Make An Admin</h1>
             <div className="overflow-x-auto border rounded-lg">
                 <table className="table w-full">
 

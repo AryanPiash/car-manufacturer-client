@@ -36,11 +36,11 @@ const Purchase = () => {
             quantity: quantity
         }
 
-        if(quantity < minQuantity){
+        if(quantity < parseInt(minQuantity)){
             toast.error('You cannot order less than Minimum Quantity.');
             return;
         }
-        if(quantity > availableQuantity){
+        if(quantity > parseInt(availableQuantity)){
             toast.error('You cannot order more than Available Quantity.');
             return;
         }
@@ -57,18 +57,18 @@ const Purchase = () => {
         .then(data => {
             if(data.success){
                 toast.success(`Congrats! Your Order taken successfully`)
-                refetch()
+                navigate('/dashboard')
             }
             else{
                 toast.error(`Sorry, This item already Ordered.Try another Item.`)
             }
-            refetch()
             
             
         })
         
-
+        
     }
+    
 
     return (
         <div className='px-8 my-12'>
