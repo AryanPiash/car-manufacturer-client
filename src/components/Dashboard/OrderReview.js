@@ -22,7 +22,7 @@ const OrderReview = () => {
             return;
         }
 
-        fetch('http://localhost:5000/review', {
+        fetch('https://car-manufacturer.herokuapp.com/review', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -21,7 +21,7 @@ const AddProduct = () => {
 
         console.log(product);
 
-        fetch('http://localhost:5000/products', {
+        fetch('https://car-manufacturer.herokuapp.com/products', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

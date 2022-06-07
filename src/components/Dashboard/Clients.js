@@ -4,7 +4,7 @@ import LoadingSpinner from '../Shared/LoadingSpinner';
 import ClientRow from './ClientRow';
 
 const Clients = () => {
-    const { data: clients, isLoading, refetch } = useQuery('clients', () => fetch('http://localhost:5000/clients',{
+    const { data: clients, isLoading, refetch } = useQuery('clients', () => fetch('https://car-manufacturer.herokuapp.com/clients',{
         method: 'GET',
          headers:{
             authorization: `Bearer ${localStorage.getItem('accessToken')}`   

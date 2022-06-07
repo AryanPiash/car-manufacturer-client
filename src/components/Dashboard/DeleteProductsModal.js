@@ -7,7 +7,7 @@ const DeleteProductsModal = ({id}) => {
     const [user] = useAuthState(auth)
     
     const handleDelete = () => {
-        const url = `http://localhost:5000/product/${id}`
+        const url = `https://car-manufacturer.herokuapp.com/product/${id}`
         console.log(url);
         fetch(url, {
             method: 'DELETE',

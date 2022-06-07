@@ -11,7 +11,7 @@ const Purchase = () => {
     const [user, loading] = useAuthState(auth)
     const navigate = useNavigate()
     
-    const url = `http://localhost:5000/products/${id}`
+    const url = `https://car-manufacturer.herokuapp.com/products/${id}`
 
     const {data: product, isLoading, refetch} = useQuery(['available'], () => fetch(url)
     .then(res => res.json()))
@@ -46,7 +46,7 @@ const Purchase = () => {
         }
 
         
-        fetch('http://localhost:5000/order', {
+        fetch('https://car-manufacturer.herokuapp.com/order', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

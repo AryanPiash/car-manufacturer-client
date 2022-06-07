@@ -8,8 +8,8 @@ import LoadingSpinner from '../Shared/LoadingSpinner';
 const MyProfile = () => {
     const [user] = useAuthState(auth)
     
-    const url = `http://localhost:5000/profile/${user?.email}`
-    // const url = `http://localhost:5000/clients/${user?.email}`
+    const url = `https://car-manufacturer.herokuapp.com/profile/${user?.email}`
+    // const url = `https://car-manufacturer.herokuapp.com/clients/${user?.email}`
 
     const { data: client, isLoading, refetch } = useQuery(['profile'], () => fetch(url)
         .then(res => res.json()))
@@ -31,7 +31,7 @@ const MyProfile = () => {
             link: e.target.link.value
         }
 
-        fetch(`http://localhost:5000/profile/${user.email}`, {
+        fetch(`https://car-manufacturer.herokuapp.com/profile/${user.email}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

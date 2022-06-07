@@ -10,7 +10,7 @@ const ManageProducts = () => {
     const [user, loading] = useAuthState(auth)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products`, {
+        fetch(`https://car-manufacturer.herokuapp.com/products`, {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
